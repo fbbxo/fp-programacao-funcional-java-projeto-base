@@ -3,30 +3,13 @@ package exercicios;
 import exercicios.base.Aula;
 import lombok.NonNull;
 
+import java.util.OptionalDouble;
 import java.util.stream.Stream;
 
-/**
- * Esta é uma classe para você poder implementar as atividades propostas no README.
- * Você <b>NÃO</b> deve alterar:
- * <ul>
- *     <li>a estrutura deste arquivo;</li>
- *     <li>o nome da classe, dos métodos ou dos atributos;</li>
- *     <li>parâmetros e tipo de retorno dos métodos.</li>
- * </ul>
- *
- * <p>Você pode alterar o código interno dos métodos, criar métodos auxiliares que podem ser chamados
- * pelos existentes, mas não deve alterar a estrutura dos métodos disponíveis.</p>
- *
- * @author Manoel Campos da Silva Filho
- */
+
 public class Aula04 extends Aula {
 
-    /**
-     * Você pode chamar os métodos existentes e outros que você criar aqui,
-     * incluir prints e fazer o que desejar neste método para conferir os valores retornados pelo seu método.
-     * Para verificar se sua implementação está correta, clique com o botão direito no nome do projeto na aba esquerda
-     * do IntelliJ e selecione a opção "Run All Tests".
-     */
+
     public Aula04() {
         final var curso = generator.CURSOS[3];
         final char homem = 'M';
@@ -40,37 +23,64 @@ public class Aula04 extends Aula {
         System.out.printf("Total das mulheres do curso de %s: %d%n", curso.getNome(), totalEstudantesCursoAndSexo(estudantes.stream(), curso, mulher));
     }
 
-    /**
-     * Veja o método construtor {@link #Aula04()}.
-     */
+
     public static void main(String[] args) {
         new Aula04();
     }
 
     protected double maiorNotaCursoAndSexo(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso, final char sexo) {
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+    
+
+        double maiorNotaMulher = stream
+                .filter(e -> e.hasCurso() && e.getCurso().equals(curso))
+                .filter(estudante -> estudante.getSexo() == sexo)
+                .mapToDouble(e -> e.getNota())
+                .max()
+                .orElse(0);
+        return maiorNotaMulher;
     }
 
     protected long totalEstudantesCursoAndSexo(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso, final char sexo) {
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+    
+        long TotalEstudantes = stream
+                .filter(e -> e.hasCurso() && e.getCurso().equals(curso))
+                .filter(e -> e.getSexo() == sexo)
+                .count();
+
+
+        return TotalEstudantes;
     }
 
     protected double mediaNotaTodosEstudantesCurso(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso){
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+        
+        double media = stream
+                .filter(e -> e.hasCurso() && e.getCurso().equals(curso))
+                .mapToDouble(e -> e.getNota())
+                .average()
+                .orElse(0);
+
+        return media;
     }
 
     protected double maiorNotaTodosEstudantes(@NonNull final Stream<Estudante> stream){
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+       
+        double notaMaxima = stream
+                .mapToDouble(e -> e.getNota())
+                .max()
+                .orElse(0);
+
+        return notaMaxima;
     }
 
 
     protected double maiorNotaHomens(@NonNull final Stream<Estudante> stream){
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+    
+        double maiorNotaHomens = stream
+                .filter(e -> e.getSexo() == 'M')
+                .mapToDouble(e -> e.getNota())
+                .max()
+                .orElse(0);
+
+        return maiorNotaHomens;
     }
 }
-
