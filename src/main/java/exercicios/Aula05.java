@@ -4,8 +4,8 @@ import exercicios.base.Aula;
 
 import java.util.stream.Stream;
 
-public class Aula5 extends Aula {
-    public Aula5() {
+public class Aula05 extends Aula {
+    public Aula05() {
         double menorNota = estudantes.stream()
                 .filter(Estudante::isHomem)
                 .filter(Estudante::hasNota)
@@ -15,18 +15,9 @@ public class Aula5 extends Aula {
                 .orElse(0);
 
         System.out.println(menorNota);
-
-//        long totalEstados = estudantes.stream()
-//                .map(e -> e.getCidade())
-//                .map(cidade -> cidade.getEstado())
-//                .map(estado -> estado.getNome())
-//                .distinct()
-//                .count();
-//
-//        System.out.println(totalEstados);
     }
 
     static void main() {
-        new  Aula5();
+        new  Aula05();
     }
 }
